@@ -1,0 +1,10 @@
+data/
+artifacts/
+answer.csv
+*.parquet
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+.idea/
+.vscode/

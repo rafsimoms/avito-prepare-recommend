@@ -1,0 +1,41 @@
+# Пути отсчитываются от папки этого файла.
+paths:
+  train: data/train.parquet
+  items: data/benchmark_items.parquet
+  queries: data/benchmark_queries.parquet
+  answer: answer.csv
+  artifacts: artifacts
+
+# Заголовок получает дополнительный вес в BM25 за счет повторения.
+text:
+  title_repeat: 3
+  params_words: 100
+  description_words: 250
+
+# Размеры выдачи отдельных каналов до объединения в итоговые 50 кандидатов.
+search:
+  use_char: true
+  use_history: true
+  use_local: true
+  global_k: 250
+  local_k: 150
+  char_k: 100
+  history_k: 100
+  char_max_features: 200000
+  rrf_k: 60
+  category_mismatch_multiplier: 0.85
+  weights:
+    bm25: 1.0
+    bm25_local: 1.0
+    char: 0.6
+    char_local: 0.6
+    query_with_filters: 0.3
+    history_context: 1.5
+    history_text_location: 1.0
+    history_text: 0.5
+
+# Размеры порций чтения, построения индекса и обработки запросов.
+memory:
+  parquet_batch_rows: 256
+  index_shard_rows: 1024
+  query_batch_rows: 8

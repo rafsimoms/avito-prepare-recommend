@@ -1,0 +1,15 @@
+[project]
+name = "avito-candidate-retrieval"
+version = "0.1.0"
+description = "CPU baseline for Avito service candidate retrieval"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.5.3",
+    "pandas>=3.0.6",
+    "pyarrow>=25.0.1",
+    "pymorphy3>=2.0.6",
+    "pyyaml>=6.0.3",
+    "scipy>=1.18.1",
+    "scikit-learn>=1.9.1",
+]

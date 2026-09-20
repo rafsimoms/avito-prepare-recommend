@@ -178,18 +178,18 @@ BM25 оценивает, насколько слова запроса харак
 В реализации используются `k1 = 1.5` и `b = 0.75`. Для слова $t$ обратная документная частота равна:
 
 $$
-\operatorname{IDF}(t)=\ln\left(1+\frac{N-\operatorname{df}(t)+0.5}{\operatorname{df}(t)+0.5}\right),
+\mathrm{IDF}(t)=\ln\left(1+\frac{N-\mathrm{df}(t)+0.5}{\mathrm{df}(t)+0.5}\right),
 $$
 
-где $N$ — число объявлений в корпусе, а $\operatorname{df}(t)$ — число объявлений, содержащих слово.
+где $N$ — число объявлений в корпусе, а $\mathrm{df}(t)$ — число объявлений, содержащих слово.
 
 Итоговая оценка документа $d$ для запроса $q$:
 
 $$
-s_{\mathrm{BM25}}(q,d)=\sum_{t\in\operatorname{unique}(q)}
-\operatorname{tf}(t,q)\,\operatorname{IDF}(t)
-\frac{\operatorname{tf}(t,d)}
-{\operatorname{tf}(t,d)+k_1\left(1-b+b\frac{|d|}{\operatorname{avgdl}}\right)}.
+s_{\mathrm{BM25}}(q,d)=\sum_{t\in\mathrm{unique}(q)}
+\mathrm{tf}(t,q)\,\mathrm{IDF}(t)
+\frac{\mathrm{tf}(t,d)}
+{\mathrm{tf}(t,d)+k_1\left(1-b+b\frac{|d|}{\mathrm{avgdl}}\right)}.
 $$
 
 Здесь `tf` — число вхождений слова после токенизации, $|d|$ — длина подготовленного документа в токенах, `avgdl` — средняя длина по всему корпусу. Повторение заголовка уже включено в `tf` и длину документа.
@@ -220,9 +220,9 @@ $$
 Каждому фрагменту присваивается TF-IDF-вес:
 
 $$
-\operatorname{idf}_{\mathrm{char}}(g)=\ln\frac{N+1}{\operatorname{df}(g)+1}+1,
+\mathrm{idf}_{\mathrm{char}}(g)=\ln\frac{N+1}{\mathrm{df}(g)+1}+1,
 \qquad
-v_d(g)=\operatorname{tf}(g,d)\cdot\operatorname{idf}_{\mathrm{char}}(g).
+v_d(g)=\mathrm{tf}(g,d)\cdot\mathrm{idf}_{\mathrm{char}}(g).
 $$
 
 Вектор документа нормируется по L2-норме. Запрос обрабатывается тем же анализатором и с теми же IDF, после чего также нормируется. Сходство — скалярное произведение нормированных векторов, то есть косинусная близость. Если у запроса нет известных индексу фрагментов, его оценки равны нулю.
@@ -280,7 +280,7 @@ $$
 Для объявления $d$ используется взвешенный Reciprocal Rank Fusion:
 
 $$
-\operatorname{RRF}(d)=\sum_{c:\,d\in L_c}\frac{w_c}{K+\operatorname{rank}_c(d)},
+\mathrm{RRF}(d)=\sum_{c:\,d\in L_c}\frac{w_c}{K+\mathrm{rank}_c(d)},
 \qquad K=60.
 $$
 
@@ -474,7 +474,7 @@ uv run --frozen python main.py run --config config.yaml
 Целевая метрика — средний Recall@50 по запросам:
 
 $$
-\operatorname{Recall@50}=\frac{1}{|Q|}\sum_{q\in Q}
+\mathrm{Recall@50}=\frac{1}{|Q|}\sum_{q\in Q}
 \frac{|C_{50}(q)\cap R(q)|}{|R(q)|},
 $$
 
